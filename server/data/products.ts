@@ -1,20 +1,5 @@
-// export interface ProductModel {
-//   _id: string;
-//   name: string;
-//   subheading: string;
-//   image: string;
-//   description: string;
-//   brand: string;
-//   tags: string[];
-//   price: number;
-//   countInStock: number;
-//   rating: number;
-//   numReviews: number;
-// }
-
 const productData = [
   {
-    _id: "1",
     name: "Donatello Action Figure",
     subheading: "Teenage Mutant Ninja Turtles",
     image: "/image/tmnt_donny.png",
@@ -28,7 +13,6 @@ const productData = [
     numReviews: 2,
   },
   {
-    _id: "2",
     name: "Pink Ranger Action Figure",
     subheading: "Power Rangers",
     image: "/image/pink_ranger.png",
@@ -42,7 +26,6 @@ const productData = [
     numReviews: 3,
   },
   {
-    _id: "3",
     name: "Apocalypse Action Figure",
     subheading: "X-Men",
     image: "/image/xmen_apocalypse.png",
@@ -56,7 +39,6 @@ const productData = [
     numReviews: 1,
   },
   {
-    _id: "4",
     name: "NBA '96-97 Basketball Series 1 Trading Card HOBBY Pack",
     subheading: "Fleer Basketball Trading Cards",
     image: "/image/fleer_b-ball_97.png",
@@ -70,7 +52,6 @@ const productData = [
     numReviews: 3,
   },
   {
-    _id: "5",
     name: "Marvel Masterpieces 1992 Base Set",
     subheading: "Marvel Trading Cards",
     image: "/image/marvel_masterpieces.png",
@@ -84,7 +65,6 @@ const productData = [
     numReviews: 3,
   },
   {
-    _id: "6",
     name: "Magic the Gathering: Tenth Edition Blister Pack",
     subheading: "15-Card Booster Pack",
     image: "/image/magic_blister_pack.png",

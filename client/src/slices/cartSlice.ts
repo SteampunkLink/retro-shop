@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import CartItemModel from "../models/CartItem";
+import ICartItem from "../models/CartItem";
+import ICartState from "../models/CartState";
 import { updateCart } from "../utils/cartUtils";
-import CartStateModel from "../models/CartState";
 
-const initialState: CartStateModel = localStorage.getItem("cart")
+const initialState: ICartState = localStorage.getItem("cart")
   ? JSON.parse(localStorage.getItem("cart") || "")
   : { cartItems: [] };
 
@@ -11,7 +11,7 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addToCart: (state, action: PayloadAction<CartItemModel>) => {
+    addToCart: (state, action: PayloadAction<ICartItem>) => {
       const item = action.payload;
       const existItem = state.cartItems.find((i) => i.prodId === item.prodId);
       if (existItem) {

@@ -2,7 +2,7 @@ import { RequestHandler } from "express";
 import asyncHandler from "express-async-handler";
 import Products from "../models/productModel";
 
-export default interface getOneProductParams {
+export default interface IGetOneProdParams {
   id: string;
 }
 
@@ -18,7 +18,7 @@ export const getAllProducts: RequestHandler = asyncHandler(
 // @desc - get one product by id (public)
 // @path - GET /api/products/:id
 export const getOneProduct: RequestHandler<
-  getOneProductParams,
+  IGetOneProdParams,
   unknown,
   unknown,
   unknown

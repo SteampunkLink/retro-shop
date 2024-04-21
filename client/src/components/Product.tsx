@@ -1,13 +1,13 @@
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import ProductModel from "../models/Product";
+import IProduct from "../models/Product";
 import Rating from "./Rating";
 
-interface ProductProps {
-  product: ProductModel;
+interface IProductProps {
+  product: IProduct;
 }
 
-const Product = ({ product }: ProductProps) => {
+const Product = ({ product }: IProductProps) => {
   return (
     <Card className="my-3 p-3 rounded">
       <Link to={`/product/${product._id}`}>

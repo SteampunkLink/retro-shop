@@ -1,6 +1,15 @@
-import { InferSchemaType, Schema, model } from "mongoose";
+import { Model, Schema, model } from "mongoose";
 
-const reviewSchema = new Schema(
+interface IReview {
+  user: Schema.Types.ObjectId;
+  name: string;
+  rating: number;
+  comment: string;
+}
+
+type ReviewModel = Model<IReview>;
+
+const reviewSchema = new Schema<IReview, ReviewModel>(
   {
     user: { type: Schema.Types.ObjectId, required: true, ref: "User" },
     name: { type: String, required: true },
@@ -10,7 +19,23 @@ const reviewSchema = new Schema(
   { timestamps: true }
 );
 
-const productSchema = new Schema(
+interface IProduct {
+  user: Schema.Types.ObjectId;
+  name: string;
+  image: string;
+  description: string;
+  brand: string;
+  tags: string[];
+  price: number;
+  countInStock: number;
+  reviews: ReviewModel[];
+  rating: number;
+  numReviews: number;
+}
+
+type ProductModel = Model<IProduct>;
+
+const productSchema = new Schema<IProduct, ProductModel>(
   {
     user: { type: Schema.Types.ObjectId, required: true, ref: "User" },
     name: { type: String, required: true },
@@ -27,6 +52,8 @@ const productSchema = new Schema(
   { timestamps: true }
 );
 
-type Product = InferSchemaType<typeof productSchema>;
-
-export default model<Product>("Product", productSchema);
+const Product: ProductModel = model<IProduct, ProductModel>(
+  "Product",
+  productSchema
+);
+export default Product;

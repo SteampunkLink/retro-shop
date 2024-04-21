@@ -8,7 +8,7 @@ import { addToCart } from "../slices/cartSlice";
 import Rating from "../components/Rating";
 import Loader from "../components/Loader";
 import ErrorMessage from "../components/ErrorMessage";
-import CartItemModel from "../models/CartItem";
+import ICartItem from "../models/CartItem";
 import QuantityPicker from "../components/QuantityPicker";
 
 const ProductView = () => {
@@ -20,7 +20,7 @@ const ProductView = () => {
   const { data: product, isLoading, error } = useGetOneProductQuery(productId);
 
   const addToCartHandler = () => {
-    let newCartItem: CartItemModel;
+    let newCartItem: ICartItem;
     newCartItem = {
       prodId: product._id,
       name: product.name,

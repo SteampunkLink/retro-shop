@@ -1,6 +1,6 @@
 import { useGetProductsQuery } from "../slices/productsApiSlice";
 import { Row, Col } from "react-bootstrap";
-import ProductModel from "../models/Product";
+import IProduct from "../models/Product";
 import Product from "../components/Product";
 import Loader from "../components/Loader";
 import ErrorMessage from "../components/ErrorMessage";
@@ -17,7 +17,7 @@ const HomeView = () => {
         <>
           <h2>Latest Products</h2>
           <Row>
-            {products.map((prod: ProductModel) => (
+            {products.map((prod: IProduct) => (
               <Col key={prod._id} sm={12} md={6} lg={4} xl={3}>
                 <Product product={prod} />
               </Col>

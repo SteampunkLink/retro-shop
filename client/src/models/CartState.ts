@@ -1,6 +1,6 @@
 import CartItemModel from "./CartItem";
 
-export default interface CartStateModel {
+export default interface ICartState {
   cartItems: CartItemModel[];
   itemsPrice: string | null;
   shippingPrice: string | null;

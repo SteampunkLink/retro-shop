@@ -1,10 +1,10 @@
 import { Alert } from "react-bootstrap";
 
-interface ErrorMessageProps {
+interface IErrorMessageProps {
   error: any;
 }
 
-const ErrorMessage = ({ error }: ErrorMessageProps) => {
+const ErrorMessage = ({ error }: IErrorMessageProps) => {
   return (
     <Alert variant="danger">
       {typeof error === "string"

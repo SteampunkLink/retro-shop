@@ -14,12 +14,14 @@ import "./assets/bootstrap.custom.css";
 import "./assets/index.css";
 import HomeView from "./views/HomeView.tsx";
 import ProductView from "./views/ProductView.tsx";
+import CartView from "./views/CartView.tsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route index={true} path="/" element={<HomeView />} />
       <Route path="/product/:id" element={<ProductView />} />
+      <Route path="/cart" element={<CartView />} />
     </Route>
   )
 );

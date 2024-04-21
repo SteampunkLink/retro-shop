@@ -1,6 +1,6 @@
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { ProductModel } from "../toy-data";
+import ProductModel from "../models/Product";
 import Rating from "./Rating";
 
 interface ProductProps {

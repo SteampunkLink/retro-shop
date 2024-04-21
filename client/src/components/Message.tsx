@@ -1,7 +1,7 @@
 import { Alert } from "react-bootstrap";
 
 interface MessageProps {
-  variant: string;
+  variant?: string;
   children: JSX.Element;
 }
 

@@ -9,7 +9,6 @@ const App = () => {
       <Header />
       <main>
         <Container>
-          <h1>Welcome to Retro Shop</h1>
           <Outlet />
         </Container>
       </main>

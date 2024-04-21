@@ -1,6 +1,4 @@
 import "dotenv/config";
-import mongoose from "mongoose";
-import env from "./utils/validateEnv";
 import userData from "./data/users";
 import productData from "./data/products";
 import User from "./models/userModel";

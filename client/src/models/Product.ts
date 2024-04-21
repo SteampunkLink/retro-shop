@@ -1,4 +1,4 @@
-export default interface ProductModel {
+export default interface IProduct {
   _id: string;
   name: string;
   subheading: string;

@@ -1,4 +1,4 @@
-export default interface CartItemModel {
+export default interface ICartItem {
   prodId: string;
   name: string;
   subheading: string;

@@ -1,10 +1,10 @@
-import CartStateModel from "../models/CartState";
+import ICartState from "../models/CartState";
 
 export const addDecimals = (num: number) => {
   return (Math.round(num * 100) / 100).toFixed(2);
 };
 
-export const updateCart = (state: CartStateModel) => {
+export const updateCart = (state: ICartState) => {
   // Calculate items price
   state.itemsPrice = addDecimals(
     state.cartItems.reduce((acc, i) => acc + i.price * i.qty, 0)

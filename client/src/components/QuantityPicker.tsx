@@ -1,6 +1,6 @@
 import { Form } from "react-bootstrap";
 
-interface QuantityPickerProps {
+interface IQtyPickerProps {
   qty: number;
   countInStock: number;
   handleQtyChange: (newQty: number) => void;
@@ -10,7 +10,7 @@ const QuantityPicker = ({
   qty,
   countInStock,
   handleQtyChange,
-}: QuantityPickerProps) => {
+}: IQtyPickerProps) => {
   return (
     <Form.Control
       as="select"

@@ -5,14 +5,14 @@ import { useAppDispatch, useAppSelector } from "../hooks";
 import { addToCart, removeFromCart } from "../slices/cartSlice";
 import Message from "../components/Message";
 import QuantityPicker from "../components/QuantityPicker";
-import CartItemModel from "../models/CartItem";
+import ICartItem from "../models/CartItem";
 
 const CartView = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const cart = useAppSelector((state) => state.cart);
   const { cartItems } = cart;
-  const addToCartHandler = async (item: CartItemModel, newQty: number) => {
+  const addToCartHandler = async (item: ICartItem, newQty: number) => {
     dispatch(addToCart({ ...item, qty: newQty }));
   };
   const removeFromCartHanlder = async (id: string) => {

@@ -1,10 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import ICartItem from "../models/CartItem";
-import ICartState from "../models/CartState";
+import { ICartItem, ICartState } from "../interfaces/Cart";
 import { updateCart } from "../utils/cartUtils";
 
 const initialState: ICartState = localStorage.getItem("cart")
-  ? JSON.parse(localStorage.getItem("cart") || "")
+  ? JSON.parse(localStorage.getItem("cart")!)
   : { cartItems: [] };
 
 const cartSlice = createSlice({

@@ -82,7 +82,7 @@ export const userLogout: RequestHandler = asyncHandler(
         res.status(500);
         throw new Error("Something went wrong.");
       } else {
-        res.sendStatus(200);
+        res.status(200).json({ message: "You have logged out." });
       }
     });
   }

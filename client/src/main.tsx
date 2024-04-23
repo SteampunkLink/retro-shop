@@ -15,6 +15,8 @@ import "./assets/index.css";
 import HomeView from "./views/HomeView.tsx";
 import ProductView from "./views/ProductView.tsx";
 import CartView from "./views/CartView.tsx";
+import LoginView from "./views/LoginView.tsx";
+import RegisterView from "./views/RegisterView.tsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -22,6 +24,8 @@ const router = createBrowserRouter(
       <Route index={true} path="/" element={<HomeView />} />
       <Route path="/product/:id" element={<ProductView />} />
       <Route path="/cart" element={<CartView />} />
+      <Route path="/login" element={<LoginView />} />
+      <Route path="/register" element={<RegisterView />} />
     </Route>
   )
 );

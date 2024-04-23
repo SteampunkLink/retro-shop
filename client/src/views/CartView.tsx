@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "../hooks";
 import { addToCart, removeFromCart } from "../slices/cartSlice";
 import Message from "../components/Message";
 import QuantityPicker from "../components/QuantityPicker";
-import ICartItem from "../models/CartItem";
+import { ICartItem } from "../interfaces/Cart";
 
 const CartView = () => {
   const navigate = useNavigate();

@@ -8,7 +8,7 @@ import { addToCart } from "../slices/cartSlice";
 import Rating from "../components/Rating";
 import Loader from "../components/Loader";
 import ErrorMessage from "../components/ErrorMessage";
-import ICartItem from "../models/CartItem";
+import { ICartItem } from "../interfaces/Cart";
 import QuantityPicker from "../components/QuantityPicker";
 
 const ProductView = () => {

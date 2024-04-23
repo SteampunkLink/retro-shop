@@ -1,4 +1,3 @@
-// import { PayloadAction } from "@reduxjs/toolkit";
 import { PRODUCTS_URL } from "../constants";
 import { apiSlice } from "./apiSlice";
 

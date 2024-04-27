@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Navbar, Nav, Container, Badge, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
+import { toast } from "react-toastify";
 import { useAppSelector, useAppDispatch } from "../hooks";
 import { useLogoutMutation } from "../slices/usersApiSlice";
 import { logout } from "../slices/authSlice";
@@ -16,11 +17,12 @@ const Header = () => {
 
   const logoutHandler = async () => {
     try {
-      await logoutApiCall(null).unwrap();
+      await logoutApiCall("").unwrap();
       dispatch(logout());
+      toast("Logout success");
       navigate("/");
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      toast(error.data.message);
     }
   };
   return (

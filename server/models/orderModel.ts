@@ -1,6 +1,6 @@
 import { Model, Schema, model } from "mongoose";
 
-interface IOrderItem {
+export interface IOrderItem {
   name: string;
   qty: number;
   image: string;
@@ -8,14 +8,14 @@ interface IOrderItem {
   product: Schema.Types.ObjectId;
 }
 
-interface IShippingAddress {
+export interface IShippingAddress {
   address: string;
   city: string;
   postalCode: string;
   country: string;
 }
 
-interface IPaymentResult {
+export interface IPaymentResult {
   id: string;
   status: string;
   update_time: string;

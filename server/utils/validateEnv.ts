@@ -5,4 +5,5 @@ export default cleanEnv(process.env, {
   PORT: port(),
   SESSION_SECRET: str(),
   NODE_ENV: str(),
+  PAYPAL_CLIENT_ID: str(),
 });

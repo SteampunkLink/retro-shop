@@ -8,7 +8,7 @@ export const protect: RequestHandler = (req, res, next) => {
     next();
   } else {
     res.status(401);
-    throw new Error("Not authorized");
+    throw new Error("You need to be logged in to view.");
   }
 };
 

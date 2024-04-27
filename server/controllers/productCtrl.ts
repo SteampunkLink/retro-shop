@@ -2,7 +2,7 @@ import { RequestHandler } from "express";
 import asyncHandler from "express-async-handler";
 import Products from "../models/productModel";
 
-export default interface IGetOneProdParams {
+export interface IGetOneProdParams {
   id: string;
 }
 

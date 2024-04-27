@@ -12,11 +12,17 @@ import App from "./App.tsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./assets/bootstrap.custom.css";
 import "./assets/index.css";
+import PrivateRoute from "./components/PrivateRoute.tsx";
 import HomeView from "./views/HomeView.tsx";
 import ProductView from "./views/ProductView.tsx";
 import CartView from "./views/CartView.tsx";
 import LoginView from "./views/LoginView.tsx";
 import RegisterView from "./views/RegisterView.tsx";
+import ShippingView from "./views/ShippingView.tsx";
+import PaymentView from "./views/PaymentView.tsx";
+import ProfileView from "./views/ProfileView.tsx";
+import PlaceOrderView from "./views/PlaceOrderView.tsx";
+import OrderView from "./views/OrderView.tsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -26,6 +32,14 @@ const router = createBrowserRouter(
       <Route path="/cart" element={<CartView />} />
       <Route path="/login" element={<LoginView />} />
       <Route path="/register" element={<RegisterView />} />
+
+      <Route path="" element={<PrivateRoute />}>
+        <Route path="/shipping" element={<ShippingView />} />
+        <Route path="/payment" element={<PaymentView />} />
+        <Route path="/profile" element={<ProfileView />} />
+        <Route path="/placeorder" element={<PlaceOrderView />} />
+        <Route path="/myorders/:id" element={<OrderView />} />
+      </Route>
     </Route>
   )
 );

@@ -1,4 +1,4 @@
-import ICartState from "../models/CartState";
+import { ICartState } from "../interfaces/Cart";
 
 export const addDecimals = (num: number) => {
   return (Math.round(num * 100) / 100).toFixed(2);

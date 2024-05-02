@@ -4,7 +4,6 @@ import Order, { IPaymentResult } from "../models/orderModel";
 import { IOrderItem, IShippingAddress } from "../models/orderModel";
 
 export interface ICreateOrderBody {
-  // user: Schema.Types.ObjectId;
   orderItems: IOrderItem[];
   shippingAddress: IShippingAddress;
   paymentMethod: string;
@@ -88,7 +87,10 @@ export const getOrderById: RequestHandler<
   unknown
 > = asyncHandler(async (req, res, next) => {
   const orderId = req.params.id;
-  const order = await Order.findById(orderId).populate("user", "name email");
+  const order = await Order.findById(orderId).populate(
+    "user",
+    "_id name email"
+  );
   if (order) {
     res.status(200).json(order);
   } else {
@@ -132,7 +134,7 @@ export const updateOrderToPaid: RequestHandler<
 });
 
 // @desc - Update order to delivered (private - admin only)
-// @path - PATCH /api/orders/:id/deliver
+// @path - PATCH /api/orders/:id/delivered
 export const updateOrderToDelivered: RequestHandler<
   IGetOneOrderParams,
   unknown,
@@ -141,14 +143,23 @@ export const updateOrderToDelivered: RequestHandler<
 > = asyncHandler(async (req, res, next) => {
   const orderId = req.params.id;
   const order = await Order.findById(orderId);
-  res.status(200).send("Update order to delivered");
+  console.log("Hello from order", { order });
+  if (order) {
+    order.isDelivered = true;
+    order.deliveredAt = new Date();
+    const updatedOrder = await order.save();
+    res.status(200).json(updatedOrder);
+  } else {
+    res.status(404);
+    throw new Error("Order not found.");
+  }
 });
 
 // @desc - Get all orders (private - admin only)
 // @path - GET /api/orders
 export const getOrders: RequestHandler = asyncHandler(
   async (req, res, next) => {
-    const orders = await Order.find();
+    const orders = await Order.find({}).populate("user", "_id name");
     res.status(200).json(orders);
   }
 );

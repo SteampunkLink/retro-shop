@@ -3,7 +3,7 @@ export interface IAuthState {
 }
 
 export interface IUserInfo {
-  id: string;
+  _id: string;
   name: string;
   email: string;
   isAdmin: boolean;

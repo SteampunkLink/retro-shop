@@ -6,7 +6,8 @@ export interface IOrderItem {
   image: string;
 }
 
-interface IShippingAddress {
+export interface IShippingAddress {
+  recipient: string;
   address: string;
   city: string;
   postalCode: string;
@@ -24,6 +25,24 @@ export interface IOrder {
   _id: string;
   createdAt: string;
   user: string;
+  orderItems: IOrderItem[];
+  shippingAddress: IShippingAddress;
+  paymentMethod: string;
+  paymentResult: IPaymentResult;
+  itemsPrice: number;
+  taxPrice: number;
+  shippingPrice: number;
+  totalPrice: number;
+  isPaid: boolean;
+  paidAt: string;
+  isDelivered: boolean;
+  deliveredAt: string;
+}
+
+export interface IOrderInfoAdmin {
+  _id: string;
+  createdAt: string;
+  user: { _id: string; name: string };
   orderItems: IOrderItem[];
   shippingAddress: IShippingAddress;
   paymentMethod: string;

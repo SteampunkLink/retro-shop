@@ -8,6 +8,9 @@ import CheckoutSteps from "../components/CheckoutSteps";
 
 const ShippingView = () => {
   const { shippingAddress } = useAppSelector((state) => state.cart);
+  const [recipient, setRecipient] = useState<string>(
+    shippingAddress?.recipient || ""
+  );
   const [address, setAddress] = useState<string>(
     shippingAddress?.address || ""
   );
@@ -24,7 +27,9 @@ const ShippingView = () => {
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(saveShippingAddress({ address, city, postalCode, country }));
+    dispatch(
+      saveShippingAddress({ recipient, address, city, postalCode, country })
+    );
     navigate("/payment");
   };
   return (
@@ -32,6 +37,15 @@ const ShippingView = () => {
       <CheckoutSteps step1 step2 />
       <h1>Shipping</h1>
       <Form onSubmit={submitHandler}>
+        <Form.Group controlId="recipient" className="my-2">
+          <Form.Label>To</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Recipient"
+            value={recipient}
+            onChange={(e) => setRecipient(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
         <Form.Group controlId="address" className="my-2">
           <Form.Label>Address</Form.Label>
           <Form.Control

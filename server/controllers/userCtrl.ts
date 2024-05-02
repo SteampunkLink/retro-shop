@@ -1,10 +1,15 @@
 import { RequestHandler } from "express";
 import asyncHandler from "express-async-handler";
 import User from "../models/userModel";
+import { IGetOneProdParams } from "./productCtrl";
 
 interface ILoginBody {
   email: string;
   password: string;
+}
+
+interface IGetUserByIdParams {
+  id: string;
 }
 
 // @desc - authenticate user (Public)
@@ -27,7 +32,7 @@ export const userLogin: RequestHandler<unknown, unknown, ILoginBody, unknown> =
     }
   });
 
-interface IUserCreateUpdate {
+interface IUserCreateUpdateBody {
   name?: string;
   email?: string;
   password?: string;
@@ -38,7 +43,7 @@ interface IUserCreateUpdate {
 export const userRegister: RequestHandler<
   unknown,
   unknown,
-  IUserCreateUpdate,
+  IUserCreateUpdateBody,
   unknown
 > = asyncHandler(async (req, res, next) => {
   const { name, email, password } = req.body;
@@ -112,7 +117,7 @@ export const userProfile: RequestHandler = asyncHandler(
 export const userProfileUpdate: RequestHandler<
   unknown,
   unknown,
-  IUserCreateUpdate,
+  IUserCreateUpdateBody,
   unknown
 > = asyncHandler(async (req, res, next) => {
   const user = await User.findById(req.session.userId);
@@ -139,32 +144,76 @@ export const userProfileUpdate: RequestHandler<
 // @path - GET /api/users/
 export const adminGetAllProfiles: RequestHandler = asyncHandler(
   async (req, res, next) => {
-    res.send("Get All Profiles");
+    const users = await User.find({});
+    res.status(200).json(users);
   }
 );
 
 // @desc - get one user by id (Private - Admin Only)
 // @path - GET /api/users/:id
-export const adminGetOneProfile: RequestHandler = asyncHandler(
-  async (req, res, next) => {
-    res.send("Get One Profile");
+export const adminGetOneProfile: RequestHandler<
+  IGetOneProdParams,
+  unknown,
+  unknown,
+  unknown
+> = asyncHandler(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+  if (user) {
+    res.status(200).json(user);
+  } else {
+    res.status(404);
+    throw new Error("User not found.");
   }
-);
+});
 
 // @desc - update one user by id (Private - Admin Only)
 // @path - PATCH /api/users/:id
-export const adminUpdateOneProfile: RequestHandler = asyncHandler(
-  async (req, res, next) => {
-    res.send("Update One Profile");
+export const adminUpdateOneProfile: RequestHandler<
+  IGetOneProdParams,
+  unknown,
+  IUserCreateUpdateBody,
+  unknown
+> = asyncHandler(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+  if (user) {
+    if (req.body.password) {
+      user.password = req.body.password;
+    }
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    const updatedUser = await user.save();
+    res.status(200).json({
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      isAdmin: updatedUser.isAdmin,
+    });
+  } else {
+    res.status(404);
+    throw new Error("User not found.");
   }
-);
+});
 
 // @desc - delete a user (Private - Admin Only)
 // @path - DELETE /api/users/:id
-export const adminDeleteOneProfile: RequestHandler = asyncHandler(
-  async (req, res, next) => {
-    res.send("Delete One Profile");
+export const adminDeleteOneProfile: RequestHandler<
+  IGetOneProdParams,
+  unknown,
+  unknown,
+  unknown
+> = asyncHandler(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+  if (user) {
+    if (user.isAdmin) {
+      res.status(400);
+      throw new Error("Cannot delete admin user.");
+    }
+    await User.deleteOne({ _id: user._id });
+    res.status(201).json({ message: "User deleted successfully." });
+  } else {
+    res.status(404);
+    throw new Error("User not found.");
   }
-);
+});
 
 // TODO: Route to let user delete their own account

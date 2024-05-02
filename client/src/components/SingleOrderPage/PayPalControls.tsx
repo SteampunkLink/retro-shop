@@ -6,9 +6,9 @@ import {
   CreateOrderData,
   CreateOrderActions,
 } from "@paypal/paypal-js/types/components/buttons";
-import { usePayOrderMutation } from "../slices/ordersApiSlice";
+import { usePayOrderMutation } from "../../slices/ordersApiSlice";
 import { toast } from "react-toastify";
-import Loader from "./Loader";
+import Loader from "../Loader";
 
 interface IPayPalParams {
   orderId: string | undefined;

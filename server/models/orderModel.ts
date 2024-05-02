@@ -9,6 +9,7 @@ export interface IOrderItem {
 }
 
 export interface IShippingAddress {
+  recipient: string;
   address: string;
   city: string;
   postalCode: string;
@@ -57,6 +58,7 @@ const orderSchema = new Schema<IOrder, OrderModel>(
       },
     ],
     shippingAddress: {
+      recipient: { type: String, required: true },
       address: { type: String, required: true },
       city: { type: String, required: true },
       postalCode: { type: String, required: true },

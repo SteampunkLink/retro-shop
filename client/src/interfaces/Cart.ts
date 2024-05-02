@@ -1,3 +1,5 @@
+import { IShippingAddress } from "./Order";
+
 export interface ICartItem {
   prodId: string;
   name: string;
@@ -8,13 +10,6 @@ export interface ICartItem {
   price: number;
   countInStock: number;
   qty: number;
-}
-
-export interface IShippingAddress {
-  address: string;
-  city: string;
-  postalCode: string;
-  country: string;
 }
 
 export interface ICartState {

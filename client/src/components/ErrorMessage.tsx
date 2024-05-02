@@ -4,11 +4,7 @@ import { toast } from "react-toastify";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { logout } from "../slices/authSlice";
 
-interface IErrorMessageProps {
-  error: any;
-}
-
-const ErrorMessage = ({ error }: IErrorMessageProps) => {
+const ErrorMessage = (error: any) => {
   const [errMsg, setErrMsg] = useState(
     error.data?.message || "An error has occured"
   );

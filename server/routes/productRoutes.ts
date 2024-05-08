@@ -5,9 +5,10 @@ import {
   getOneProduct,
   updateProduct,
   deleteProduct,
+  createProductReview,
 } from "../controllers/productCtrl";
 
-import { adminOnly } from "../middleware/authMiddleware";
+import { protect, adminOnly } from "../middleware/authMiddleware";
 
 const router = express.Router();
 
@@ -17,5 +18,5 @@ router
   .get(getOneProduct)
   .patch(adminOnly, updateProduct)
   .delete(adminOnly, deleteProduct);
-
+router.route("/:id/reviews").post(protect, createProductReview);
 export default router;

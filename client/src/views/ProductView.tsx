@@ -10,6 +10,7 @@ import Loader from "../components/Loader";
 import ErrorMessage from "../components/ErrorMessage";
 import { ICartItem } from "../interfaces/Cart";
 import QuantityPicker from "../components/QuantityPicker";
+import Reviews from "../components/Reviews";
 
 const ProductView = () => {
   const { id: productId } = useParams();
@@ -17,7 +18,12 @@ const ProductView = () => {
   const dispatch = useAppDispatch();
   const [qty, setQty] = useState(1);
 
-  const { data: product, isLoading, error } = useGetOneProductQuery(productId);
+  const {
+    data: product,
+    isLoading,
+    refetch,
+    error,
+  } = useGetOneProductQuery(productId);
 
   const addToCartHandler = () => {
     let newCartItem: ICartItem;
@@ -93,21 +99,6 @@ const ProductView = () => {
                       <Row>
                         <Col>Qty</Col>
                         <Col>
-                          {/* <Form.Control
-                            as="select"
-                            value={qty}
-                            onChange={(
-                              e: React.ChangeEvent<HTMLInputElement>
-                            ) => setQty(Number(e.target.value))}
-                          >
-                            {[...Array(product.countInStock).keys()].map(
-                              (c) => (
-                                <option key={c + 1} value={c + 1}>
-                                  {c + 1}
-                                </option>
-                              )
-                            )}
-                          </Form.Control> */}
                           <QuantityPicker
                             qty={qty}
                             countInStock={product.countInStock}
@@ -131,6 +122,11 @@ const ProductView = () => {
               </Card>
             </Col>
           </Row>
+          <Reviews
+            refetch={refetch}
+            reviews={product.reviews}
+            prodId={product._id}
+          />
         </>
       )}
     </>

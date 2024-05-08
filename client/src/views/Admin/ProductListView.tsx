@@ -1,8 +1,10 @@
 import { Table, Row, Col, Button } from "react-bootstrap";
 import { FaTrash, FaEdit, FaPlus } from "react-icons/fa";
 import { LinkContainer } from "react-router-bootstrap";
+import { useParams } from "react-router-dom";
 import ErrorMessage from "../../components/ErrorMessage";
 import Loader from "../../components/Loader";
+import Paginate from "../../components/Paginate";
 import {
   useGetProductsQuery,
   useCreateProductMutation,
@@ -12,12 +14,13 @@ import { IProduct } from "../../interfaces/Product";
 import { toast } from "react-toastify";
 
 const ProductListView = () => {
+  const pageNumber = useParams();
   const {
-    data: products,
+    data,
     isLoading: isProdLoading,
     refetch,
     error,
-  } = useGetProductsQuery("");
+  } = useGetProductsQuery(pageNumber);
 
   const [createProduct, { isLoading: isCreateLoading }] =
     useCreateProductMutation();
@@ -27,7 +30,7 @@ const ProductListView = () => {
 
   const createProductHandler = async () => {
     try {
-      await createProduct("");
+      await createProduct(pageNumber);
       refetch();
     } catch (error: any) {
       toast.error(error.message);
@@ -80,7 +83,7 @@ const ProductListView = () => {
               </tr>
             </thead>
             <tbody>
-              {products.map((prod: IProduct) => (
+              {data.products.map((prod: IProduct) => (
                 <tr key={prod._id}>
                   <td>{prod.name}</td>
                   <td>${prod.price}</td>
@@ -107,6 +110,7 @@ const ProductListView = () => {
               ))}
             </tbody>
           </Table>
+          <Paginate page={data.page} pages={data.pages} isAdmin={true} />
         </>
       )}
     </>

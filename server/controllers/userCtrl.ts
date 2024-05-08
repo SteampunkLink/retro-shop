@@ -20,6 +20,7 @@ export const userLogin: RequestHandler<unknown, unknown, ILoginBody, unknown> =
     const user = await User.findOne({ email });
     if (user && (await user.matchPassword(password))) {
       req.session.userId = user._id;
+      req.session.userName = user.name;
       res.status(200).json({
         _id: user._id,
         name: user.name,

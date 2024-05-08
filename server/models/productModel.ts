@@ -1,7 +1,7 @@
-import { Model, Schema, model } from "mongoose";
+import { Model, Schema, model, Types } from "mongoose";
 
-interface IReview {
-  user: Schema.Types.ObjectId;
+export interface IReview {
+  user: Types.ObjectId;
   name: string;
   rating: number;
   comment: string;
@@ -28,7 +28,7 @@ interface IProduct {
   tags: string[];
   price: number;
   countInStock: number;
-  reviews: ReviewModel[];
+  reviews: IReview[];
   rating: number;
   numReviews: number;
 }

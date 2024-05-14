@@ -2,13 +2,13 @@ import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, Row, Col, ListGroup, Card, Image } from "react-bootstrap";
 import { toast } from "react-toastify";
-import { useAppSelector, useAppDispatch } from "../hooks";
-import CheckoutSteps from "../components/CheckoutSteps";
-import Loader from "../components/Loader";
-import Message from "../components/Message";
-import ErrorMessage from "../components/ErrorMessage";
-import { useCreateOrderMutation } from "../slices/ordersApiSlice";
-import { clearCartItems } from "../slices/cartSlice";
+import { useAppSelector, useAppDispatch } from "../../hooks";
+import CheckoutSteps from "../../components/CheckoutSteps";
+import Loader from "../../components/Loader";
+import Message from "../../components/Message";
+import ErrorMessage from "../../components/ErrorMessage";
+import { useCreateOrderMutation } from "../../slices/ordersApiSlice";
+import { clearCartItems } from "../../slices/cartSlice";
 
 const PlaceOrderView = () => {
   const navigate = useNavigate();
@@ -35,7 +35,6 @@ const PlaceOrderView = () => {
           product: i.prodId,
         };
       });
-      console.log(formattedCartItems);
       const res = await createOrder({
         orderItems: formattedCartItems,
         shippingAddress: cart.shippingAddress,
@@ -60,7 +59,11 @@ const PlaceOrderView = () => {
             <ListGroup.Item>
               <h2>Shipping</h2>
               <p>
-                <strong>Address:</strong> {cart?.shippingAddress?.address},{" "}
+                <strong>To:</strong> {cart?.shippingAddress?.recipient}
+              </p>
+              <p>
+                <strong>Address:</strong> {cart?.shippingAddress?.address}
+                <br />
                 {cart?.shippingAddress?.city}{" "}
                 {cart?.shippingAddress?.postalCode},{" "}
                 {cart?.shippingAddress?.country}

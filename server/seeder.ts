@@ -4,6 +4,7 @@ import productData from "./data/products";
 import User from "./models/userModel";
 import Product from "./models/productModel";
 import Order from "./models/orderModel";
+import Address from "./models/addressModel";
 import connectDB from "./config/db";
 
 connectDB();
@@ -13,6 +14,7 @@ const importData = async () => {
     await Order.deleteMany();
     await Product.deleteMany();
     await User.deleteMany();
+    await Address.deleteMany();
 
     const createdUsers = await User.insertMany(userData);
     const adminUser = createdUsers[0]._id;

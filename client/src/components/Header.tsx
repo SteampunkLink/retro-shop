@@ -6,6 +6,8 @@ import { toast } from "react-toastify";
 import { useAppSelector, useAppDispatch } from "../hooks";
 import { useLogoutMutation } from "../slices/usersApiSlice";
 import { logout } from "../slices/authSlice";
+import { clearAllCartData } from "../slices/cartSlice";
+import SearchBox from "./SearchBox";
 
 const Header = () => {
   const { cartItems } = useAppSelector((state) => state.cart);
@@ -20,6 +22,7 @@ const Header = () => {
       await logoutApiCall("").unwrap();
       dispatch(logout());
       toast("Logout success");
+      dispatch(clearAllCartData());
       navigate("/");
     } catch (error: any) {
       toast(error.data.message);
@@ -35,6 +38,7 @@ const Header = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
+              <SearchBox />
               <LinkContainer to="/cart">
                 <Nav.Link>
                   <FaShoppingCart /> Cart

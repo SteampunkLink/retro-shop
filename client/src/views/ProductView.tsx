@@ -11,6 +11,7 @@ import ErrorMessage from "../components/ErrorMessage";
 import { ICartItem } from "../interfaces/Cart";
 import QuantityPicker from "../components/QuantityPicker";
 import Reviews from "../components/Reviews";
+import Meta from "../components/Meta";
 
 const ProductView = () => {
   const { id: productId } = useParams();
@@ -53,6 +54,11 @@ const ProductView = () => {
         <ErrorMessage error={error} />
       ) : (
         <>
+          <Meta
+            title={product.name}
+            description={product.description}
+            keywords={product.tags.join(", ")}
+          />
           <Row>
             <Col md={5}>
               <Image src={product.image} alt={product.name} fluid />

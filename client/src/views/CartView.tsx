@@ -6,6 +6,7 @@ import { addToCart, removeFromCart } from "../slices/cartSlice";
 import Message from "../components/Message";
 import QuantityPicker from "../components/QuantityPicker";
 import { ICartItem } from "../interfaces/Cart";
+import Meta from "../components/Meta";
 
 const CartView = () => {
   const navigate = useNavigate();
@@ -23,6 +24,7 @@ const CartView = () => {
   };
   return (
     <Row>
+      <Meta title="My Cart" />
       <Col md={8}>
         <h2 style={{ marginBottom: "20px" }}>Shopping Cart</h2>
         {cartItems.length === 0 ? (

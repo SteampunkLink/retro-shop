@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ICartItem, ICartState, IShippingAddress } from "../interfaces/Cart";
+import { ICartItem, ICartState } from "../interfaces/Cart";
+import { ICreateAddressFields } from "../interfaces/Address";
 import { updateCart } from "../utils/cartUtils";
 
 const initialState: ICartState = localStorage.getItem("cart")
@@ -29,7 +30,10 @@ const cartSlice = createSlice({
       );
       return updateCart(state);
     },
-    saveShippingAddress: (state, action: PayloadAction<IShippingAddress>) => {
+    saveShippingAddress: (
+      state,
+      action: PayloadAction<ICreateAddressFields>
+    ) => {
       state.shippingAddress = action.payload;
       return updateCart(state);
     },
@@ -41,6 +45,16 @@ const cartSlice = createSlice({
       state.cartItems = [];
       return updateCart(state);
     },
+    clearAllCartData: (state) => {
+      state.cartItems = [];
+      state.itemsPrice = null;
+      state.shippingPrice = null;
+      state.taxPrice = null;
+      state.totalPrice = null;
+      state.shippingAddress = null;
+      state.paymentMethod = "PayPal";
+      return updateCart(state);
+    },
   },
 });
 
@@ -50,6 +64,7 @@ export const {
   saveShippingAddress,
   savePaymentMethod,
   clearCartItems,
+  clearAllCartData,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

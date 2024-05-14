@@ -72,7 +72,6 @@ const ProductListView = () => {
           <Table striped bordered hover responsive className="table-sm">
             <thead>
               <tr>
-                {/* <th>ID</th> */}
                 <th>NAME</th>
                 <th>PRICE</th>
                 <th>TAGS</th>

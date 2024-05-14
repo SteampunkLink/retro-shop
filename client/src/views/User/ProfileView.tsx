@@ -3,15 +3,15 @@ import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { FaTimes } from "react-icons/fa";
-import { useAppDispatch, useAppSelector } from "../hooks";
-import { useUpdateProfileMutation } from "../slices/usersApiSlice";
-import { useGetMyOrdersQuery } from "../slices/ordersApiSlice";
-import { setCredentials } from "../slices/authSlice";
-import RegisterUpdateProfileForm from "../components/RegisterUpdateProfileForm";
-import { ISubmitFormArgs } from "../interfaces/Auth";
-import ErrorMessage from "../components/ErrorMessage";
-import Loader from "../components/Loader";
-import { IOrder } from "../interfaces/Order";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import { useUpdateProfileMutation } from "../../slices/usersApiSlice";
+import { useGetMyOrdersQuery } from "../../slices/ordersApiSlice";
+import { setCredentials } from "../../slices/authSlice";
+import RegisterUpdateProfileForm from "../../components/RegisterUpdateProfileForm";
+import { ISubmitFormArgs } from "../../interfaces/Auth";
+import ErrorMessage from "../../components/ErrorMessage";
+import Loader from "../../components/Loader";
+import { IOrder } from "../../interfaces/Order";
 
 const ProfileView = () => {
   const dispatch = useAppDispatch();
@@ -34,7 +34,7 @@ const ProfileView = () => {
     } else {
       try {
         const res = await updateProfile({
-          _id: userInfo?.id,
+          _id: userInfo?._id,
           name: formFields.name,
           email: formFields.email,
           password: formFields.password,

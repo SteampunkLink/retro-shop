@@ -1,18 +1,18 @@
 import { useParams } from "react-router-dom";
 import { Row, Col, ListGroup, Card } from "react-bootstrap";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
-import { useAppSelector } from "../hooks";
-import ErrorMessage from "../components/ErrorMessage";
-import Loader from "../components/Loader";
+import { useAppSelector } from "../../hooks";
+import ErrorMessage from "../../components/ErrorMessage";
+import Loader from "../../components/Loader";
 import {
   useGetOrderDetailsQuery,
   useGetPayPalClientIdQuery,
-} from "../slices/ordersApiSlice";
-import ShippingAddress from "../components/SingleOrderPage/ShippingAddress";
-import PaymentMethod from "../components/SingleOrderPage/PaymentMethod";
-import OrderItems from "../components/SingleOrderPage/OrderItems";
-import OrderSummary from "../components/SingleOrderPage/OrderSummary";
-import PayPalControls from "../components/SingleOrderPage/PayPalControls";
+} from "../../slices/ordersApiSlice";
+import ShippingAddress from "../../components/SingleOrderPage/ShippingAddress";
+import PaymentMethod from "../../components/SingleOrderPage/PaymentMethod";
+import OrderItems from "../../components/SingleOrderPage/OrderItems";
+import OrderSummary from "../../components/SingleOrderPage/OrderSummary";
+import PayPalControls from "../../components/SingleOrderPage/PayPalControls";
 
 const OrderView = () => {
   const { id: orderId } = useParams();

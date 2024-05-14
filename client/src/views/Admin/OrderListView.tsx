@@ -10,7 +10,7 @@ const OrderListView = () => {
   const { data: orders, isLoading, error } = useGetOrdersQuery("");
   return (
     <>
-      <h1>Ordres</h1>
+      <h1>Orders</h1>
       {isLoading ? (
         <Loader />
       ) : error ? (

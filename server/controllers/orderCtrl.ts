@@ -1,11 +1,12 @@
 import { RequestHandler } from "express";
 import asyncHandler from "express-async-handler";
 import Order, { IPaymentResult } from "../models/orderModel";
-import { IOrderItem, IShippingAddress } from "../models/orderModel";
+import { IOrderItem } from "../models/orderModel";
+import { IAddress } from "../models/addressModel";
 
 export interface ICreateOrderBody {
   orderItems: IOrderItem[];
-  shippingAddress: IShippingAddress;
+  shippingAddress: IAddress;
   paymentMethod: string;
   itemsPrice: number;
   taxPrice: number;

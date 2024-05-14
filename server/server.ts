@@ -8,6 +8,7 @@ import MongoStore from "connect-mongo";
 import productRoutes from "./routes/productRoutes";
 import userRoutes from "./routes/userRoutes";
 import orderRoutes from "./routes/orderRoutes";
+import addressRoutes from "./routes/addressRoutes";
 import uploadRoutes from "./routes/uploadRoutes";
 import { notFound, errorHandler } from "./middleware/errorMiddleware";
 const port = env.PORT || 3000;
@@ -40,6 +41,7 @@ app.get("/", (req, res) => {
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/orders", orderRoutes);
+app.use("/api/address", addressRoutes);
 app.use("/api/upload", uploadRoutes);
 
 app.get("/api/config/paypal", (req, res) => {

@@ -1,8 +1,6 @@
 import { RequestHandler } from "express";
 import asyncHandler from "express-async-handler";
-import { ObjectId } from "mongoose";
 import Product, { IReview } from "../models/productModel";
-import User from "../models/userModel";
 
 export interface IGetOneProdParams {
   id: string;
@@ -10,6 +8,7 @@ export interface IGetOneProdParams {
 
 interface IGetOneProdQuery {
   pageNumber?: number;
+  keyword?: string;
 }
 
 // @desc - get all of the products (public)
@@ -20,10 +19,13 @@ export const getAllProducts: RequestHandler<
   unknown,
   IGetOneProdQuery
 > = asyncHandler(async (req, res, next) => {
-  const pageSize = 3;
+  const pageSize = 8;
   const page = Number(req.query.pageNumber) || 1;
-  const count = await Product.countDocuments();
-  const allProducts = await Product.find()
+  const keywordQuery = req.query.keyword
+    ? { name: { $regex: req.query.keyword, $options: "i" } }
+    : {};
+  const count = await Product.countDocuments({ ...keywordQuery });
+  const allProducts = await Product.find({ ...keywordQuery })
     .sort({ createdAt: -1 })
     .limit(pageSize)
     .skip(pageSize * (page - 1));
@@ -168,3 +170,18 @@ export const createProductReview: RequestHandler<
     throw new Error("Product not found!");
   }
 });
+
+// @desc - get top products (public)
+// @path - GET /api/products/top
+export const getTopProducts: RequestHandler = asyncHandler(
+  async (req, res, next) => {
+    const products = await Product.find({ countInStock: { $gt: 0 } })
+      .sort({ rating: -1 })
+      .limit(3);
+    if (!products) {
+      res.status(404);
+      throw new Error("Product Not Found");
+    }
+    res.status(200).json(products);
+  }
+);

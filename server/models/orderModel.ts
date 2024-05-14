@@ -1,4 +1,5 @@
 import { Model, Schema, model } from "mongoose";
+import { IAddress } from "./addressModel";
 
 export interface IOrderItem {
   name: string;
@@ -6,14 +7,6 @@ export interface IOrderItem {
   image: string;
   price: number;
   product: Schema.Types.ObjectId;
-}
-
-export interface IShippingAddress {
-  recipient: string;
-  address: string;
-  city: string;
-  postalCode: string;
-  country: string;
 }
 
 export interface IPaymentResult {
@@ -26,7 +19,7 @@ export interface IPaymentResult {
 interface IOrder {
   user: Schema.Types.ObjectId;
   orderItems: IOrderItem[];
-  shippingAddress: IShippingAddress;
+  shippingAddress: IAddress;
   paymentMethod: string;
   paymentResult: IPaymentResult;
   itemsPrice: number;
@@ -85,6 +78,3 @@ const orderSchema = new Schema<IOrder, OrderModel>(
 
 const Order: OrderModel = model<IOrder, OrderModel>("Order", orderSchema);
 export default Order;
-// type Order = InferSchemaType<typeof orderSchema>;
-
-// export default model<Order>("Order", orderSchema);

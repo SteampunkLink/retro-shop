@@ -11,7 +11,7 @@ interface IGetOneProdQuery {
   keyword?: string;
 }
 
-// @desc - get all of the products (public)
+// @desc - get all published products (public)
 // @path - GET /api/products
 export const getAllProducts: RequestHandler<
   unknown,
@@ -22,8 +22,18 @@ export const getAllProducts: RequestHandler<
   const pageSize = 8;
   const page = Number(req.query.pageNumber) || 1;
   const keywordQuery = req.query.keyword
-    ? { name: { $regex: req.query.keyword, $options: "i" } }
-    : {};
+    ? {
+        $and: [
+          { isPublished: true },
+          {
+            $or: [
+              { name: { $regex: req.query.keyword, $options: "i" } },
+              { tags: { $regex: req.query.keyword, $options: "i" } },
+            ],
+          },
+        ],
+      }
+    : { isPublished: true };
   const count = await Product.countDocuments({ ...keywordQuery });
   const allProducts = await Product.find({ ...keywordQuery })
     .sort({ createdAt: -1 })
@@ -157,6 +167,8 @@ export const createProductReview: RequestHandler<
       throw new Error("Product already reviewed");
     }
 
+    if (newReview.rating < 1) newReview.rating = 1;
+    if (newReview.rating > 5) newReview.rating = 5;
     productToReview.reviews.push(newReview);
     productToReview.numReviews = productToReview.reviews.length;
     productToReview.rating =
@@ -185,3 +197,42 @@ export const getTopProducts: RequestHandler = asyncHandler(
     res.status(200).json(products);
   }
 );
+
+// @desc - get all products (private - admin only)
+// @path - GET /api/products/admin
+export const getAdminProductList: RequestHandler<
+  unknown,
+  unknown,
+  unknown,
+  IGetOneProdQuery
+> = asyncHandler(async (req, res, next) => {
+  const pageSize = 12;
+  const page = Number(req.query.pageNumber) || 1;
+  const count = await Product.countDocuments({});
+  const allProducts = await Product.find({})
+    .sort({ createdAt: -1 })
+    .limit(pageSize)
+    .skip(pageSize * (page - 1));
+  res
+    .status(200)
+    .json({ products: allProducts, page, pages: Math.ceil(count / pageSize) });
+});
+
+// @desc - change product's publish status (private - admin only)
+// @path - PATCH /api/products/:id/publish
+export const updateProductPublishStatus: RequestHandler<
+  IGetOneProdParams,
+  unknown,
+  unknown,
+  unknown
+> = asyncHandler(async (req, res, next) => {
+  const product = await Product.findById(req.params.id);
+  if (product) {
+    product.isPublished = !product.isPublished;
+    const updatedProduct = await product.save();
+    res.status(200).json(updatedProduct);
+  } else {
+    res.status(404);
+    throw new Error("Product not found.");
+  }
+});

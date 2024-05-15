@@ -1,14 +1,21 @@
 import { Table, Row, Col, Button } from "react-bootstrap";
-import { FaTrash, FaEdit, FaPlus } from "react-icons/fa";
+import {
+  FaTrash,
+  FaEdit,
+  FaPlus,
+  FaToggleOff,
+  FaToggleOn,
+} from "react-icons/fa";
 import { LinkContainer } from "react-router-bootstrap";
 import { useParams } from "react-router-dom";
 import ErrorMessage from "../../components/ErrorMessage";
 import Loader from "../../components/Loader";
 import Paginate from "../../components/Paginate";
 import {
-  useGetProductsQuery,
+  useGetAdminProductListQuery,
   useCreateProductMutation,
   useDeleteProductMutation,
+  useUpdatePublishStatusMutation,
 } from "../../slices/productsApiSlice";
 import { IProduct } from "../../interfaces/Product";
 import { toast } from "react-toastify";
@@ -20,10 +27,13 @@ const ProductListView = () => {
     isLoading: isProdLoading,
     refetch,
     error,
-  } = useGetProductsQuery(pageNumber);
+  } = useGetAdminProductListQuery(pageNumber);
 
   const [createProduct, { isLoading: isCreateLoading }] =
     useCreateProductMutation();
+
+  const [updatePublishStatus, { isLoading: isPubStatusLoading }] =
+    useUpdatePublishStatusMutation();
 
   const [deleteProduct, { isLoading: isDeleteLoading }] =
     useDeleteProductMutation();
@@ -37,14 +47,29 @@ const ProductListView = () => {
     }
   };
 
+  const togglePublishHandler = async (pid: string, isPub: boolean) => {
+    const warningMessage = isPub
+      ? "Are you sure you want to unpublish? (Product will no longer appear on the site.)"
+      : "Are you sure you want to publish? (Product will be visible on site.)";
+    if (window.confirm(warningMessage)) {
+      try {
+        await updatePublishStatus(pid);
+        refetch();
+        toast.success("Product status updated!");
+      } catch (err: any) {
+        toast.error(err.message);
+      }
+    }
+  };
+
   const deleteHandler = async (pid: string) => {
     if (window.confirm("Are you sure you want to delete this product?")) {
       try {
         const response: any = await deleteProduct(pid).unwrap();
         refetch();
         toast.success(response.message);
-      } catch (error: any) {
-        toast.error(error.message);
+      } catch (err: any) {
+        toast.error(err.message);
       }
     }
   };
@@ -62,7 +87,9 @@ const ProductListView = () => {
         </Col>
       </Row>
       {isCreateLoading && <Loader />}
+      {isPubStatusLoading && <Loader />}
       {isDeleteLoading && <Loader />}
+
       {isProdLoading ? (
         <Loader />
       ) : error ? (
@@ -75,7 +102,7 @@ const ProductListView = () => {
                 <th>NAME</th>
                 <th>PRICE</th>
                 <th>TAGS</th>
-                <th>BRAND</th>
+                <th>PUBLISHED?</th>
                 <th># IN STOCK</th>
                 <th>EDIT</th>
                 <th>DELETE</th>
@@ -87,7 +114,20 @@ const ProductListView = () => {
                   <td>{prod.name}</td>
                   <td>${prod.price}</td>
                   <td>{prod.tags.join(", ")}</td>
-                  <td>{prod.brand}</td>
+                  <td>
+                    <Button
+                      variant="outline-primary"
+                      onClick={() =>
+                        togglePublishHandler(prod._id, prod.isPublished)
+                      }
+                    >
+                      {prod.isPublished ? (
+                        <FaToggleOn style={{ color: "green" }} />
+                      ) : (
+                        <FaToggleOff style={{ color: "red" }} />
+                      )}
+                    </Button>
+                  </td>
                   <td>{prod.countInStock}</td>
                   <td>
                     <LinkContainer to={`/admin/product/${prod._id}`}>

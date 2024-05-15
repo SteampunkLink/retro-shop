@@ -25,18 +25,22 @@ const Reviews = ({ refetch, reviews, prodId }: IReviewsProps) => {
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      const data = {
-        rating,
-        comment,
-      };
-      await createReview({ prodId, data }).unwrap();
-      refetch();
-      toast.success("Review Submitted");
-      setRating(0);
-      setComment("");
-    } catch (error: any) {
-      toast.error(error.data.message || error.error);
+    if (rating === 0) {
+      toast.error("Please select a rating.");
+    } else {
+      try {
+        const data = {
+          rating,
+          comment,
+        };
+        await createReview({ prodId, data }).unwrap();
+        refetch();
+        toast.success("Review Submitted");
+        setRating(0);
+        setComment("");
+      } catch (error: any) {
+        toast.error(error.data.message || error.error);
+      }
     }
   };
   return (

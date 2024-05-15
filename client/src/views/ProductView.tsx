@@ -42,7 +42,6 @@ const ProductView = () => {
     dispatch(addToCart(newCartItem));
     navigate("/cart");
   };
-
   return (
     <>
       <Link className="btn btn-light my-3" to="/">

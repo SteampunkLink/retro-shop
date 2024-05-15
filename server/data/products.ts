@@ -11,6 +11,7 @@ const productData = [
     countInStock: 1,
     rating: 4.5,
     numReviews: 2,
+    isPublished: true,
   },
   {
     name: "Pink Ranger Action Figure",
@@ -24,6 +25,7 @@ const productData = [
     countInStock: 2,
     rating: 3,
     numReviews: 3,
+    isPublished: true,
   },
   {
     name: "Apocalypse Action Figure",
@@ -37,6 +39,7 @@ const productData = [
     countInStock: 0,
     rating: 3.5,
     numReviews: 1,
+    isPublished: true,
   },
   {
     name: "NBA '96-97 Basketball Series 1 Trading Card HOBBY Pack",
@@ -50,6 +53,7 @@ const productData = [
     countInStock: 5,
     rating: 3.5,
     numReviews: 3,
+    isPublished: true,
   },
   {
     name: "Marvel Masterpieces 1992 Base Set",
@@ -63,6 +67,7 @@ const productData = [
     countInStock: 2,
     rating: 5,
     numReviews: 3,
+    isPublished: true,
   },
   {
     name: "Magic the Gathering: Tenth Edition Blister Pack",
@@ -76,6 +81,7 @@ const productData = [
     countInStock: 2,
     rating: 5,
     numReviews: 3,
+    isPublished: true,
   },
 ];
 

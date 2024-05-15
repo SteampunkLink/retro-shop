@@ -41,7 +41,7 @@ const fileFilter = (
   if (extname && mimetype) {
     cb(null, true);
   } else {
-    cb(new Error("Images only!"));
+    cb(null, false);
   }
 };
 
@@ -50,8 +50,14 @@ const uploadSingleImage = upload.single("image");
 
 router.post("/", (req, res) => {
   uploadSingleImage(req, res, function (error) {
-    if (error) {
-      return res.status(400).send({ message: error.message });
+    console.log(req.file);
+    if (error || !req.file) {
+      return res
+        .status(400)
+        .send({
+          message:
+            "Failed to upload. Make sure your image is a jpg, png, or webp image file.",
+        });
     }
     res.status(200).send({
       message: "Image loaded successfully",

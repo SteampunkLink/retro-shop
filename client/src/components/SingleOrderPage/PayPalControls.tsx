@@ -21,23 +21,13 @@ const PayPalControls = ({ orderId, refetch, payValue }: IPayPalParams) => {
   const onApprove = async (_data: OnApproveData, actions: OnApproveActions) => {
     try {
       const details = await actions.order?.capture();
-      await payOrder({ orderId, details });
+      await payOrder({ orderId, details }).unwrap();
       refetch();
       toast("Payment successful");
     } catch (error: any) {
       toast.error(error.data.message || error.message);
     }
   };
-
-  // const onApproveTest = async () => {
-  //   try {
-  //     await payOrder({ orderId, details: { payer: {} } });
-  //     refetch();
-  //     toast("Payment successful");
-  //   } catch (error: any) {
-  //     toast.error(error.data.message || error.message);
-  //   }
-  // };
 
   const onError = (err: any) => {
     toast(err.message);
@@ -62,9 +52,6 @@ const PayPalControls = ({ orderId, refetch, payValue }: IPayPalParams) => {
     <Loader />
   ) : (
     <>
-      {/* <Button onClick={onApproveTest} style={{ marginBottom: "10px" }}>
-        Test Pay Order
-      </Button> */}
       <div>
         <PayPalButtons
           createOrder={createOrder}

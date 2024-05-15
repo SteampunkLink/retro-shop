@@ -31,6 +31,7 @@ interface IProduct {
   reviews: IReview[];
   rating: number;
   numReviews: number;
+  isPublished: boolean;
 }
 
 type ProductModel = Model<IProduct>;
@@ -48,6 +49,7 @@ const productSchema = new Schema<IProduct, ProductModel>(
     reviews: [reviewSchema],
     rating: { type: Number, default: 0 },
     numReviews: { type: Number, default: 0 },
+    isPublished: { type: Boolean, default: false },
   },
   { timestamps: true }
 );

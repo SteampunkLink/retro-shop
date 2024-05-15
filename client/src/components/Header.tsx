@@ -9,6 +9,11 @@ import { logout } from "../slices/authSlice";
 import { clearAllCartData } from "../slices/cartSlice";
 import SearchBox from "./SearchBox";
 
+const BANNERBACK = "black";
+const BANNERCOLOR = "red";
+const BANNERMSG =
+  "Please note: this is not a real store. This is just a proof of concept. Please do not actually order anything from this site.";
+
 const Header = () => {
   const { cartItems } = useAppSelector((state) => state.cart);
   const { userInfo } = useAppSelector((state) => state.auth);
@@ -30,6 +35,12 @@ const Header = () => {
   };
   return (
     <header>
+      <div
+        className="site-banner"
+        style={{ backgroundColor: BANNERBACK, color: BANNERCOLOR }}
+      >
+        {BANNERMSG}
+      </div>
       <Navbar bg="primary" expand="lg" collapseOnSelect>
         <Container>
           <LinkContainer to="/">

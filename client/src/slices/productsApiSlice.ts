@@ -59,6 +59,19 @@ export const productsApiSlice = apiSlice.injectEndpoints({
       }),
       keepUnusedDataFor: 5,
     }),
+    getAdminProductList: builder.query({
+      query: (pageNumber) => ({
+        url: `${PRODUCTS_URL}/admin`,
+        params: pageNumber,
+      }),
+      keepUnusedDataFor: 5,
+    }),
+    updatePublishStatus: builder.mutation({
+      query: (prodId) => ({
+        url: `${PRODUCTS_URL}/${prodId}/publish`,
+        method: "PATCH",
+      }),
+    }),
   }),
 });
 
@@ -71,4 +84,6 @@ export const {
   useDeleteProductMutation,
   useCreateReviewMutation,
   useGetTopProductsQuery,
+  useGetAdminProductListQuery,
+  useUpdatePublishStatusMutation,
 } = productsApiSlice;

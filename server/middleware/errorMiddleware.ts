@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express";
+import { isValidObjectId } from "mongoose";
 import env from "../utils/validateEnv";
 
 const notFound = (req: Request, res: Response, next: NextFunction) => {
@@ -16,16 +17,18 @@ const errorHandler = (
   let statusCode = res.statusCode === 200 ? 500 : res.statusCode;
   let message = err.message;
 
-  // check for mongoose cast error
-  if (err.name === "CastError") {
-    statusCode = 404;
-    message = "Resource Not Found";
-  }
-
   res.status(statusCode).json({
     message,
     stack: env.NODE_ENV === "production" ? "Pancakes" : err.stack,
   });
 };
 
-export { notFound, errorHandler };
+const checkObjectId = (req: Request, res: Response, next: NextFunction) => {
+  if (!isValidObjectId(req.params.id)) {
+    res.status(404);
+    throw new Error("Resource not found. - Invalid objectId.");
+  }
+  next();
+};
+
+export { notFound, errorHandler, checkObjectId };

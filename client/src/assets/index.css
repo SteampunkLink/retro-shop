@@ -1,3 +1,18 @@
+@font-face {
+  font-family: "SimpleSlum";
+  src: local("SimpleSlum"), url("./gomarice_simple_slum.ttf") format("truetype");
+  /* font-weight: bold; */
+}
+
+:root {
+  --purple: #4a4ecb;
+  --pink: #f47eae;
+  --lite-pink: #fdd3e4;
+  --cyan: #32d1cd;
+  --teal: #17a2b8;
+  --yellow: #ffe452;
+}
+
 main {
   min-height: 80vh;
 }
@@ -17,10 +32,9 @@ main {
 }
 
 .product-title {
-  height: 2.5em; /* Set a fixed height */
+  height: 3em; /* Set a fixed height */
   overflow: hidden; /* Hide overflow content */
   text-overflow: ellipsis; /* Add ellipsis for long text */
-  white-space: nowrap; /* Prevent wrapping */
 }
 
 table td,
@@ -50,4 +64,96 @@ table th {
   right: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.5);
+}
+
+main {
+  background: url("yellow-paper.jpg");
+  background-size: cover;
+  padding-top: 8px;
+}
+
+.site-banner {
+  text-align: center;
+}
+
+.site-brand:hover {
+  box-shadow: 0px 0px 19px 10px rgba(247, 229, 68, 0.75);
+  cursor: pointer;
+}
+
+.dropdown-toggle {
+  color: var(--pink) !important;
+}
+
+.dropdown-toggle:hover {
+  color: var(--lite-pink) !important;
+}
+
+.accent-font {
+  font-family: "SimpleSlum";
+  text-align: center;
+}
+
+.card-shadow {
+  box-shadow: 8px 8px 10px 1px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 8px 8px 10px 1px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 8px 8px 10px 1px rgba(0, 0, 0, 0.75);
+}
+
+@keyframes dynamicBackground {
+  0% {
+    background-position-y: -100px;
+  }
+  100% {
+    background-position-y: -400px;
+  }
+}
+
+.main-carousel {
+  animation: dynamicBackground 6s linear 0s 1 forwards;
+  background-size: cover !important;
+}
+
+.main-carousel-gel {
+  background-color: rgba(248, 247, 216, 0.7);
+}
+
+.site-footer {
+  background-color: var(--purple);
+  color: var(--lite-pink);
+}
+
+.custom-loader {
+  perspective: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+.custom-loader-square {
+  width: 200px;
+  height: 200px;
+  background: url("./RetroR.jpg");
+  background-size: cover;
+  transform: rotateY(45deg);
+  animation: rotateAnimation 1s linear infinite;
+}
+
+@keyframes rotateAnimation {
+  0% {
+    transform: rotateY(0deg);
+  }
+  25% {
+    transform: rotateY(45deg);
+  }
+  50% {
+    transform: rotateY(180deg);
+  }
+  75% {
+    transform: rotateY(225deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
 }

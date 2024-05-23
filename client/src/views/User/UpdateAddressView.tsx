@@ -8,6 +8,7 @@ import {
 } from "../../slices/addressesApiSlice";
 import Loader from "../../components/Loader";
 import ErrorMessage from "../../components/ErrorMessage";
+import FormContainer from "../../components/FormContainer";
 
 const UpdateAddressView = () => {
   const { id: addressId } = useParams();
@@ -36,8 +37,8 @@ const UpdateAddressView = () => {
     }
   };
   return (
-    <div>
-      <h1>Edit Address</h1>
+    <FormContainer>
+      <h1 className="accent-font">Edit Address</h1>
       {addressError ? (
         <ErrorMessage error={addressError} />
       ) : addressLoading || updateLoading ? (
@@ -48,7 +49,7 @@ const UpdateAddressView = () => {
           shippingAddress={returnedAddress}
         />
       )}
-    </div>
+    </FormContainer>
   );
 };
 

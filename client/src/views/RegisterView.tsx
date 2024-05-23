@@ -47,7 +47,7 @@ const RegisterView = () => {
 
   return (
     <FormContainer>
-      <h1>Register</h1>
+      <h1 className="accent-font">Register</h1>
       <RegisterUpdateProfileForm
         userInfo={null}
         isLoading={registerLoading}

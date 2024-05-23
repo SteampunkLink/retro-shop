@@ -9,13 +9,17 @@ interface IProductProps {
 
 const Product = ({ product }: IProductProps) => {
   return (
-    <Card className="my-3 p-3 rounded">
+    <Card className="my-3 p-3 rounded card-shadow">
       <Link to={`/product/${product._id}`}>
-        <Card.Img src={product.image} variant="top" />
+        <Card.Img
+          src={product.image}
+          variant="top"
+          style={{ height: "200px", objectFit: "cover" }}
+        />
       </Link>
       <Card.Body>
         <Link to={`/product/${product._id}`}>
-          <Card.Title as="div">
+          <Card.Title as="div" className="product-title">
             <strong>{product.name}</strong>
           </Card.Title>
         </Link>

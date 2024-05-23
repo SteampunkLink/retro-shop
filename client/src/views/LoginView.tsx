@@ -41,7 +41,7 @@ const LoginView = () => {
 
   return (
     <FormContainer>
-      <h1>Sign In</h1>
+      <h1 className="accent-font">Sign In</h1>
       <Form onSubmit={(e) => submitHanlder(e)}>
         <Form.Group controlId="email" className="my-3">
           <Form.Label>Email Address</Form.Label>

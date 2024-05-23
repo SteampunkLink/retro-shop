@@ -29,7 +29,7 @@ const PaymentView = () => {
   return (
     <FormContainer>
       <CheckoutSteps step1 step2 step3 />
-      <h1>Payment Method</h1>
+      <h1 className="accent-font">Payment Method</h1>
       <Form onSubmit={submitHandler}>
         <Form.Group>
           <Form.Label as="legend">Select Method</Form.Label>
@@ -46,7 +46,7 @@ const PaymentView = () => {
             />
           </Col>
         </Form.Group>
-        <Button type="submit" variant="primary">
+        <Button type="submit" variant="primary" className="my-2">
           Continue
         </Button>
       </Form>

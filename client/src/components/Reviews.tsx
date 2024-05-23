@@ -45,7 +45,7 @@ const Reviews = ({ refetch, reviews, prodId }: IReviewsProps) => {
   };
   return (
     <Row className="reviews">
-      <Col md={6}>
+      <Col md={6} className="accent-font mx-auto">
         <h2>Reviews</h2>
       </Col>
       {reviews.length === 0 && (
@@ -53,16 +53,16 @@ const Reviews = ({ refetch, reviews, prodId }: IReviewsProps) => {
           <p>No Reviews</p>
         </Message>
       )}
-      <ListGroup variant="flush">
+      <ListGroup variant="flush" className="card-shadow bg-success mb-4">
         {reviews.map((review) => (
-          <ListGroup.Item key={review._id}>
+          <ListGroup.Item key={review._id} className="bg-success">
             <strong>{review.name}</strong>
             <Rating value={review.rating} />
             <p>{review.createdAt.substring(0, 10)}</p>
             <p>{review.comment}</p>
           </ListGroup.Item>
         ))}
-        <ListGroup.Item>
+        <ListGroup.Item className="bg-success">
           <h2>Write a Review</h2>
           {reviewLoading && <Loader />}
           {userInfo ? (

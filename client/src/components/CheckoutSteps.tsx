@@ -13,7 +13,10 @@ const CheckoutSteps = ({ step1, step2, step3, step4 }: ICheckoutStepsProps) => {
     <Nav className="justify-content-center mb-4">
       <Nav.Item>
         {step1 ? (
-          <LinkContainer to="/login">
+          <LinkContainer
+            to="/login"
+            className="text-white bg-info rounded-circle m-1"
+          >
             <Nav.Link>Login</Nav.Link>
           </LinkContainer>
         ) : (
@@ -22,7 +25,10 @@ const CheckoutSteps = ({ step1, step2, step3, step4 }: ICheckoutStepsProps) => {
       </Nav.Item>
       <Nav.Item>
         {step2 ? (
-          <LinkContainer to="/shipping">
+          <LinkContainer
+            to="/shipping"
+            className="text-white bg-info rounded-circle m-1"
+          >
             <Nav.Link>Shipping</Nav.Link>
           </LinkContainer>
         ) : (
@@ -31,7 +37,10 @@ const CheckoutSteps = ({ step1, step2, step3, step4 }: ICheckoutStepsProps) => {
       </Nav.Item>
       <Nav.Item>
         {step3 ? (
-          <LinkContainer to="/payment">
+          <LinkContainer
+            to="/payment"
+            className="text-white bg-info rounded-circle m-1"
+          >
             <Nav.Link>Payment</Nav.Link>
           </LinkContainer>
         ) : (
@@ -40,7 +49,10 @@ const CheckoutSteps = ({ step1, step2, step3, step4 }: ICheckoutStepsProps) => {
       </Nav.Item>
       <Nav.Item>
         {step4 ? (
-          <LinkContainer to="/placeorder">
+          <LinkContainer
+            to="/placeorder"
+            className="text-white bg-info rounded-circle m-1"
+          >
             <Nav.Link>Place Order</Nav.Link>
           </LinkContainer>
         ) : (

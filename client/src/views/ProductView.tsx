@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap";
 import { useAppDispatch } from "../hooks";
 import { useGetOneProductQuery } from "../slices/productsApiSlice";
@@ -12,6 +11,7 @@ import { ICartItem } from "../interfaces/Cart";
 import QuantityPicker from "../components/QuantityPicker";
 import Reviews from "../components/Reviews";
 import Meta from "../components/Meta";
+import GoBackBtn from "../components/GoBackBtn";
 
 const ProductView = () => {
   const { id: productId } = useParams();
@@ -44,9 +44,7 @@ const ProductView = () => {
   };
   return (
     <>
-      <Link className="btn btn-light my-3" to="/">
-        Go Back
-      </Link>
+      <GoBackBtn />
       {isLoading ? (
         <Loader />
       ) : error ? (
@@ -63,9 +61,9 @@ const ProductView = () => {
               <Image src={product.image} alt={product.name} fluid />
             </Col>
             <Col md={4}>
-              <ListGroup variant="flush">
+              <ListGroup variant="flush" className="card-shadow">
                 <ListGroup.Item>
-                  <h3>{product.name}</h3>
+                  <h3 className="accent-font">{product.name}</h3>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Rating
@@ -77,7 +75,7 @@ const ProductView = () => {
               </ListGroup>
             </Col>
             <Col md={3}>
-              <Card>
+              <Card className="card-shadow">
                 <ListGroup>
                   <ListGroup.Item>
                     <Row>

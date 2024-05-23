@@ -8,6 +8,7 @@ import { useLogoutMutation } from "../slices/usersApiSlice";
 import { logout } from "../slices/authSlice";
 import { clearAllCartData } from "../slices/cartSlice";
 import SearchBox from "./SearchBox";
+import BrandLogo from "../assets/RetroShopLogo.jpg";
 
 const BANNERBACK = "black";
 const BANNERCOLOR = "red";
@@ -43,15 +44,15 @@ const Header = () => {
       </div>
       <Navbar bg="primary" expand="lg" collapseOnSelect>
         <Container>
-          <LinkContainer to="/">
-            <Navbar.Brand>Retro Shop</Navbar.Brand>
+          <LinkContainer to="/" className="site-brand">
+            <img src={BrandLogo} alt="Retro Shop" height="50" />
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
               <SearchBox />
               <LinkContainer to="/cart">
-                <Nav.Link>
+                <Nav.Link className="text-secondary">
                   <FaShoppingCart /> Cart
                   {cartItems.length > 0 && (
                     <Badge pill bg="success" style={{ marginLeft: "5px" }}>
@@ -61,7 +62,11 @@ const Header = () => {
                 </Nav.Link>
               </LinkContainer>
               {userInfo ? (
-                <NavDropdown title={userInfo.name} id="username">
+                <NavDropdown
+                  title={userInfo.name}
+                  id="username"
+                  className="text-secondary"
+                >
                   <LinkContainer to="/profile">
                     <NavDropdown.Item>Profile</NavDropdown.Item>
                   </LinkContainer>
@@ -71,7 +76,7 @@ const Header = () => {
                 </NavDropdown>
               ) : (
                 <LinkContainer to="/login">
-                  <Nav.Link>
+                  <Nav.Link className="text-secondary">
                     <FaUser /> Login
                   </Nav.Link>
                 </LinkContainer>

@@ -1,6 +1,5 @@
 import { Table, Button, Row, Col } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { FaTimes } from "react-icons/fa";
 import { useAppDispatch, useAppSelector } from "../../hooks";
@@ -12,6 +11,7 @@ import { ISubmitFormArgs } from "../../interfaces/Auth";
 import ErrorMessage from "../../components/ErrorMessage";
 import Loader from "../../components/Loader";
 import { IOrder } from "../../interfaces/Order";
+import GoBackBtn from "../../components/GoBackBtn";
 
 const ProfileView = () => {
   const dispatch = useAppDispatch();
@@ -49,12 +49,10 @@ const ProfileView = () => {
 
   return (
     <>
-      <Link className="btn btn-light my-3" to="/">
-        Go Back
-      </Link>
+      <GoBackBtn />
       <Row>
-        <Col md={3}>
-          <h2>User Profile</h2>
+        <Col md={3} className="bg-secondary py-2">
+          <h2 className="accent-font">User Profile</h2>
           <RegisterUpdateProfileForm
             userInfo={userInfo}
             isLoading={profileLoading}
@@ -63,13 +61,19 @@ const ProfileView = () => {
           />
         </Col>
         <Col md={9}>
-          <h2>Orders</h2>
+          <h2 className="accent-font">Orders</h2>
           {ordersLoading ? (
             <Loader />
           ) : ordersError ? (
             <ErrorMessage error={ordersError} />
           ) : (
-            <Table striped bordered hover responsive className="table-sm">
+            <Table
+              striped
+              bordered
+              hover
+              responsive
+              className="table-sm card-shadow"
+            >
               <thead>
                 <tr>
                   <th>ID</th>
@@ -102,7 +106,7 @@ const ProfileView = () => {
                     </td>
                     <td>
                       <LinkContainer to={`/myorders/${o._id}`}>
-                        <Button className="btn-sm" variant="light">
+                        <Button className="btn-sm" variant="info">
                           Details
                         </Button>
                       </LinkContainer>

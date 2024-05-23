@@ -4,6 +4,7 @@ import AddressForm from "../../components/AddressForm";
 import { ICreateAddressFields } from "../../interfaces/Address";
 import { useCreateAddressMutation } from "../../slices/addressesApiSlice";
 import Loader from "../../components/Loader";
+import FormContainer from "../../components/FormContainer";
 
 const CreateAddressView = () => {
   const [createAddress, { isLoading }] = useCreateAddressMutation();
@@ -23,10 +24,10 @@ const CreateAddressView = () => {
     }
   };
   return (
-    <div>
-      <h1>Add New Address</h1>
+    <FormContainer>
+      <h1 className="accent-font">Add New Address</h1>
       {isLoading ? <Loader /> : <AddressForm handleSubmit={createNewAddress} />}
-    </div>
+    </FormContainer>
   );
 };
 

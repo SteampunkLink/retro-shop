@@ -55,7 +55,7 @@ const PlaceOrderView = () => {
       <CheckoutSteps step1 step2 step3 step4 />
       <Row>
         <Col md={8}>
-          <ListGroup variant="flush">
+          <ListGroup variant="flush" className="card-shadow">
             <ListGroup.Item>
               <h2>Shipping</h2>
               <p>
@@ -104,7 +104,7 @@ const PlaceOrderView = () => {
         </Col>
         <Col md={4}>
           <Card>
-            <ListGroup variant="flush">
+            <ListGroup variant="flush" className="card-shadow">
               <ListGroup.Item>
                 <h2>Order Summary</h2>
               </ListGroup.Item>

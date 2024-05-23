@@ -25,8 +25,9 @@ const SearchBox = () => {
         value={keyword}
         placeholder="Search Products..."
         className="mr-sm-2 ml-sm-5"
+        style={{ height: "40px" }}
       />
-      <Button type="submit" variant="outline-dark" className="p-2 mx-2">
+      <Button type="submit" variant="secondary">
         Search
       </Button>
     </Form>

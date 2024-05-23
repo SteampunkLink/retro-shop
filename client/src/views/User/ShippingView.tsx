@@ -67,8 +67,8 @@ const ShippingView = () => {
       ) : (
         <>
           <CheckoutSteps step1 step2 />
-          <h1>Shipping</h1>
-          <Link className="btn btn-light my-3" to="/address">
+          <h1 className="accent-font">Shipping</h1>
+          <Link className="btn btn-primary my-3" to="/address">
             Add New Address
           </Link>
           {!addresses.length ? (
@@ -80,7 +80,7 @@ const ShippingView = () => {
             </Message>
           ) : (
             <Form onSubmit={selectAddressAndContinue}>
-              <Table>
+              <Table className="card-shadow">
                 <thead>
                   <tr>
                     <th>SELECT</th>

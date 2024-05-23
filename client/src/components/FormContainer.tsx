@@ -7,8 +7,12 @@ interface IFormContainer {
 const FormContainer = ({ children }: IFormContainer) => {
   return (
     <Container>
-      <Row className="justiify-content-md-center">
-        <Col xs={12} md={6}>
+      <Row>
+        <Col
+          xs={12}
+          md={6}
+          className="mx-auto card rounded card-shadow bg-secondary"
+        >
           {children}
         </Col>
       </Row>

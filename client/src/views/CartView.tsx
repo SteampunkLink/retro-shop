@@ -25,8 +25,11 @@ const CartView = () => {
   return (
     <Row>
       <Meta title="My Cart" />
+
+      <h2 style={{ marginBottom: "20px" }} className="accent-font">
+        Shopping Cart
+      </h2>
       <Col md={8}>
-        <h2 style={{ marginBottom: "20px" }}>Shopping Cart</h2>
         {cartItems.length === 0 ? (
           <Message>
             <>
@@ -34,7 +37,7 @@ const CartView = () => {
             </>
           </Message>
         ) : (
-          <ListGroup variant="flush">
+          <ListGroup variant="flush" className="card-shadow">
             {cartItems.map((item) => (
               <ListGroup.Item key={item.prodId}>
                 <Row>
@@ -69,7 +72,7 @@ const CartView = () => {
       </Col>
       <Col md={4}>
         <Card>
-          <ListGroup variant="flush">
+          <ListGroup variant="flush" className="card-shadow">
             <ListGroup.Item>
               <h3>
                 Subtotal: ({cartItems.reduce((acc, item) => acc + item.qty, 0)})

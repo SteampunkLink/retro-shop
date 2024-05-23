@@ -45,7 +45,7 @@ const OrderView = () => {
       </p>
       <Row>
         <Col md={8}>
-          <ListGroup variant="flush">
+          <ListGroup variant="flush" className="card-shadow">
             <ShippingAddress
               address={order.shippingAddress}
               deliveryStatus={{
@@ -62,7 +62,7 @@ const OrderView = () => {
           </ListGroup>
         </Col>
         <Col md={4}>
-          <Card>
+          <Card className="card-shadow">
             <OrderSummary
               itemsPrice={order.itemsPrice}
               shippingPrice={order.shippingPrice}

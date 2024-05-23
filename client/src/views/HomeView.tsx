@@ -30,7 +30,7 @@ const HomeView = () => {
         <ErrorMessage error={error} />
       ) : (
         <>
-          <h2>Latest Products</h2>
+          <h2 className="accent-font">Latest Products</h2>
           <Row>
             {data.products.map((prod: IProduct) => (
               <Col key={prod._id} sm={12} md={6} lg={4} xl={3}>

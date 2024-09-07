@@ -52,7 +52,7 @@ const dirname = path.resolve();
 app.use("/uploads", express.static(path.join(dirname, "/uploads")));
 
 if (env.NODE_ENV === "PRODUCTION") {
-  const rootDirectory = path.join(__dirname, "..", "..", "frontend", "dist");
+  const rootDirectory = path.join(__dirname, "..", "..", "client", "dist");
   app.use(express.static(rootDirectory));
   app.get("*", (req, res) => {
     res.sendFile(path.resolve(rootDirectory, "index.html"));

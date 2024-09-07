@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "tsc": "tsc --project ./server",
-    "start": "node server/dist/server.js",
+    "start": "export NODE_ENV=PRODUCTION && node server/dist/server.js",
     "server": "nodemon server/server.ts",
     "client": "npm run dev --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",

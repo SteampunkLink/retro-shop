@@ -34,9 +34,9 @@ app.use(
   })
 );
 
-app.get("/", (req, res) => {
-  res.send("API is running...");
-});
+// app.get("/", (req, res) => {
+//   res.send("API is running...");
+// });
 
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
@@ -50,6 +50,18 @@ app.get("/api/config/paypal", (req, res) => {
 
 const dirname = path.resolve();
 app.use("/uploads", express.static(path.join(dirname, "/uploads")));
+
+if (env.NODE_ENV === "PRODUCTION") {
+  const rootDirectory = path.join(__dirname, "..", "..", "frontend", "dist");
+  app.use(express.static(rootDirectory));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(rootDirectory, "index.html"));
+  });
+} else {
+  app.get("/", (req, res) => {
+    res.send(`Server is running in ${env.NODE_ENV}`);
+  });
+}
 
 app.use(notFound);
 app.use(errorHandler);
